@@ -75,6 +75,7 @@ import { Row } from '../src/Row'
 import { SwitchView } from '../src/SwitchView'
 import { DividerLine } from '../src/DividerLine'
 import { Column } from '../src/Column'
+import { Circle } from '../src/Circle'
 
 class App extends Component {
   state = {
@@ -161,6 +162,15 @@ class App extends Component {
                   },
                 })}
               </Column>
+
+              <View style={{ marginTop: 24 }}>
+                <Text style={styles.h1}>Circle</Text>
+                <Row>
+                  <Circle size={24} />
+                  <Circle size={36} color="transparent" borderWidth={1} borderColor="#4f4f4f" />
+                  <Circle size={48} color="#ffcc00" />
+                </Row>
+              </View>
             </View>
           </ScrollView>
         </SafeAreaView>

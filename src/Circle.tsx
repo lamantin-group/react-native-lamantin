@@ -4,6 +4,8 @@ import { View, ViewStyle } from 'react-native'
 export type CircleProps = {
   size: number
   color?: string
+  borderColor?: string
+  borderWidth?: number
   style?: ViewStyle
 }
 
@@ -12,10 +14,12 @@ export class Circle extends PureComponent<CircleProps> {
     color: '#000',
     size: 4,
     style: {},
+    borderColor: 'transparent',
+    borderWidth: 0,
   }
 
   render() {
-    const { color, size, style, children } = this.props
+    const { color, size, style, children, borderColor, borderWidth } = this.props
     return (
       <View
         style={{
@@ -25,6 +29,8 @@ export class Circle extends PureComponent<CircleProps> {
           borderRadius: size / 2,
           alignItems: 'center',
           justifyContent: 'center',
+          borderColor: borderColor,
+          borderWidth: borderWidth,
           ...style,
         }}>
         {children}
