@@ -1,9 +1,9 @@
 {
   "compilerOptions": {
-    "allowUnreachableCode": true,
-    "allowUnusedLabels": true,
+    // "allowUnreachableCode": true,
+    // "allowUnusedLabels": true,
     "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true,
+    // "forceConsistentCasingInFileNames": true,
     "jsx": "react",
     "lib": [
       "esnext"
@@ -15,8 +15,8 @@
     "noImplicitReturns": true,
     "noImplicitUseStrict": false,
     "noStrictGenericChecks": false,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
+    // "noUnusedLocals": true,
+    // "noUnusedParameters": true,
     "resolveJsonModule": true,
     "skipLibCheck": true,
     "strict": true,
