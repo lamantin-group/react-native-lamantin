@@ -17,6 +17,7 @@ import {
   Text,
   StatusBar,
   ButtonProps,
+  Slider,
 } from 'react-native'
 
 import {
@@ -73,12 +74,14 @@ import { Button } from 'react-native-library'
 import { Row } from '../src/Row'
 import { SwitchView } from '../src/SwitchView'
 import { DividerLine } from '../src/DividerLine'
+import { Column } from '../src/Column'
 
 class App extends Component {
   state = {
     isLoading: false,
     enabled: true,
     uppercase: true,
+    space: 0,
   }
 
   button(props: any = {}) {
@@ -96,7 +99,7 @@ class App extends Component {
   }
 
   render() {
-    const { isLoading, enabled, uppercase } = this.state
+    const { isLoading, enabled, uppercase, space } = this.state
 
     return (
       <Fragment>
@@ -129,15 +132,35 @@ class App extends Component {
                 onChanges={uppercase => this.setState({ uppercase })}
               />
 
+              <DividerLine style={{ marginTop: 24 }} color="transparent" />
+              <Text>Column space = {space}</Text>
+              <Slider
+                step={1}
+                minimumValue={0}
+                maximumValue={36}
+                value={space}
+                onValueChange={space => this.setState({ space })}
+              />
+
               <DividerLine style={{ marginVertical: 12 }} color="transparent" />
-              <Text style={styles.h1}>Button</Text>
+              <Text style={styles.h1}>Button inside Column</Text>
               <View style={{ marginTop: 12 }} />
-              {this.button()}
-              {this.button({
-                style: {
-                  backgroundColor: '#ffcc00',
-                },
-              })}
+
+              <Column
+                space={space}
+                mode={'between'}
+                style={{ borderColor: 'blue', borderWidth: 1 }}>
+                {this.button({
+                  style: {
+                    backgroundColor: '#f4f4f4',
+                  },
+                })}
+                {this.button({
+                  style: {
+                    backgroundColor: '#ffcc00',
+                  },
+                })}
+              </Column>
             </View>
           </ScrollView>
         </SafeAreaView>
