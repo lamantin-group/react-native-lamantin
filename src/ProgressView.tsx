@@ -1,10 +1,11 @@
 import React, { PureComponent } from 'react'
-import { ActivityIndicator } from 'react-native'
+import { ActivityIndicator, ViewStyle } from 'react-native'
 
 export interface ProgressViewProps {
   isLoading: boolean
   size?: 'small' | 'large'
   color?: string
+  style?: ViewStyle
 }
 
 /**
@@ -15,14 +16,15 @@ export class ProgressView extends PureComponent<ProgressViewProps> {
     isLoading: false,
     size: 'small',
     color: '#4f4f4f',
+    style: {},
   }
 
   render() {
-    const { isLoading, children, size, color } = this.props
+    const { isLoading, children, size, color, style } = this.props
 
     return (
       <React.Fragment>
-        {isLoading ? <ActivityIndicator size={size} color={color} /> : children}
+        {isLoading ? <ActivityIndicator style={style} size={size} color={color} /> : children}
       </React.Fragment>
     )
   }

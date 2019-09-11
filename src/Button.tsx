@@ -37,7 +37,7 @@ export class Button extends PureComponent<ButtonProps> {
     const { isLoading, text, uppercase, renderText, textProps } = this.props
     return (
       <View style={{ flexDirection: 'row', alignContent: 'center', alignItems: 'center' }}>
-        <ProgressView isLoading={isLoading} />
+        <ProgressView isLoading={isLoading} style={{ marginHorizontal: 8 }} />
 
         {renderText ? (
           renderText({ uppercase, text })
