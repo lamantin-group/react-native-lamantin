@@ -3,6 +3,8 @@ What is it
 
 Set of components for https://lamantin.group development
 
+![v1.gif](.github/v1.gif)
+
 Install
 -------
 

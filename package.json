@@ -1,15 +1,19 @@
 {
-  "name": "react-native-library",
+  "name": "react-native-lamantin",
   "version": "1.0.0",
   "author": "lamantin",
-  "description": "Library bootstrap",
+  "description": "Set of components for https://lamantin.group development",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/USERNAME/REPOSITORY.git"
+    "url": "git+https://github.com/lamantingroup/react-native-lamantin.git"
   },
   "keywords": [
-    "react-native"
+    "react-native",
+    "components",
+    "ui kit",
+    "ui",
+    "lamantin"
   ],
   "main": "index.ts",
   "scripts": {
