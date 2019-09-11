@@ -37,7 +37,7 @@ interface ColumnProps {
   mode: 'first' | 'last' | 'between' | 'top' | 'bottom' | 'flex'
 }
 
-export default class Column extends PureComponent<ColumnProps> {
+export class Column extends PureComponent<ColumnProps> {
   static defaultProps = {
     mode: 'flex',
     top: null,

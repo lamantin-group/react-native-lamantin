@@ -9,7 +9,7 @@ interface Props {
   color?: string
 }
 
-export default class DividerLine extends PureComponent<Props> {
+export class DividerLine extends PureComponent<Props> {
   static defaultProps = {
     style: {},
     vertical: false,

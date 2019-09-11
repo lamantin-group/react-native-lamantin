@@ -13,7 +13,7 @@ interface SwitchViewProps {
   descriptionStyle?: ViewStyle
 }
 
-export default class SwitchView extends PureComponent<SwitchViewProps> {
+export class SwitchView extends PureComponent<SwitchViewProps> {
   static defaultProps = {
     title: null,
     description: null,
@@ -22,6 +22,10 @@ export default class SwitchView extends PureComponent<SwitchViewProps> {
     checked: false,
     style: {},
     styleSwitch: {},
+    titleStyle: {
+      fontSize: 18,
+      fontWeight: '500',
+    },
   }
 
   render() {

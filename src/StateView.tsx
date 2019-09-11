@@ -23,7 +23,7 @@ interface StateViewProps {
  * This is achieved by applying an opacity mask on childs inside StateView.
  * Use *disabledOpacity* option for change opacity level, where 0 - transparent and 1 - visible.
  */
-export default class StateView extends Component<StateViewProps> {
+export class StateView extends Component<StateViewProps> {
   static defaultProps = {
     enabled: true,
     disabledOpacity: 0.3,

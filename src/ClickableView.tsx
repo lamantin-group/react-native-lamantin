@@ -8,7 +8,7 @@ interface ClickableViewProps {
   disabled?: boolean
 }
 
-class ClickableView extends PureComponent<ClickableViewProps> {
+export class ClickableView extends PureComponent<ClickableViewProps> {
   static defaultProps = {
     onPress: () => {},
     style: null,
@@ -30,5 +30,3 @@ class ClickableView extends PureComponent<ClickableViewProps> {
     )
   }
 }
-
-export default ClickableView

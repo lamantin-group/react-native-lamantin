@@ -1,8 +1,8 @@
 import React, { PureComponent } from 'react'
 import { View, ViewStyle, Text, TextStyle } from 'react-native'
-import StateView from './StateView'
-import ClickableView from './ClickableView'
-import ProgressView from './ProgressView'
+import { StateView } from './StateView'
+import { ClickableView } from './ClickableView'
+import { ProgressView } from './ProgressView'
 
 interface TextProps {
   text: string
@@ -22,7 +22,7 @@ interface ButtonProps extends TextProps {
   renderText?: (props: TextProps) => void
 }
 
-export default class Button extends PureComponent<ButtonProps> {
+export class Button extends PureComponent<ButtonProps> {
   static defaultProps = {
     style: {},
     isLoading: false,
@@ -49,9 +49,9 @@ export default class Button extends PureComponent<ButtonProps> {
   }
 
   render() {
-    const { style, onPress, enabled } = this.props
+    const { style, onPress, enabled, isLoading } = this.props
     return (
-      <ClickableView onPress={onPress} style={style}>
+      <ClickableView disabled={!enabled} onPress={isLoading ? undefined : onPress} style={style}>
         <StateView enabled={enabled}>{this.renderContent()}</StateView>
       </ClickableView>
     )

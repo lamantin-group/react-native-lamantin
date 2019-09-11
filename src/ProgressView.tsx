@@ -10,7 +10,7 @@ export interface ProgressViewProps {
 /**
  * Render ProgressView when isLoading === true or children otherwise.
  */
-export default class ProgressView extends PureComponent<ProgressViewProps> {
+export class ProgressView extends PureComponent<ProgressViewProps> {
   static defaultProps = {
     isLoading: false,
     size: 'small',

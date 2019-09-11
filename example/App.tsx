@@ -8,7 +8,7 @@
  * @format
  */
 
-import React, { Fragment } from 'react'
+import React, { Fragment, Component } from 'react'
 import { SafeAreaView, StyleSheet, ScrollView, View, Text, StatusBar } from 'react-native'
 
 import {
@@ -29,12 +29,14 @@ const styles = StyleSheet.create({
   },
   body: {
     backgroundColor: Colors.white,
+    paddingHorizontal: 16,
+    paddingTop: 16,
   },
   sectionContainer: {
     marginTop: 32,
     paddingHorizontal: 24,
   },
-  sectionTitle: {
+  h1: {
     fontSize: 24,
     fontWeight: '600',
     color: Colors.black,
@@ -59,54 +61,52 @@ const styles = StyleSheet.create({
 })
 
 import { Button } from 'react-native-library'
+import { Row } from '../src/Row'
+import { SwitchView } from '../src/SwitchView'
+import { DividerLine } from '../src/DividerLine'
 
-const App = () => {
-  const usingHermes = typeof HermesInternal === 'object' && HermesInternal !== null
+class App extends Component {
+  state = {
+    isLoading: false,
+    enabled: true,
+  }
 
-  return (
-    <Fragment>
-      <StatusBar barStyle="dark-content" />
-      <SafeAreaView>
-        <ScrollView contentInsetAdjustmentBehavior="automatic" style={styles.scrollView}>
-          <Header />
-          <Button text="Hello bitches" />
-          {!usingHermes ? null : (
-            <View style={styles.engine}>
-              <Text style={styles.footer}>Engine: Hermes</Text>
+  render() {
+    const { isLoading, enabled } = this.state
+
+    return (
+      <Fragment>
+        <StatusBar barStyle="dark-content" />
+        <SafeAreaView>
+          <ScrollView contentInsetAdjustmentBehavior="automatic" style={styles.scrollView}>
+            <View style={styles.body}>
+              <Text style={styles.h1}>Настройки</Text>
+              <SwitchView
+                style={{ marginTop: 12 }}
+                title="isLoading"
+                description="description isLoading"
+                checked={isLoading}
+                onChanges={isLoading => this.setState({ isLoading })}
+              />
+
+              <SwitchView
+                style={{ marginTop: 12 }}
+                title="enabled"
+                description="description enabled"
+                checked={enabled}
+                onChanges={enabled => this.setState({ enabled })}
+              />
+
+              <DividerLine style={{ marginVertical: 12 }} color="transparent" />
+              <Text style={styles.h1}>Button</Text>
+              <View style={{ marginTop: 12 }} />
+              <Button text="Button" isLoading={isLoading} enabled={enabled} />
             </View>
-          )}
-          <View style={styles.body}>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>Step One</Text>
-              <Text style={styles.sectionDescription}>
-                Edit <Text style={styles.highlight}>App.tsx</Text> to change this screen and then
-                come back to see your edits.
-              </Text>
-            </View>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>See Your Changes</Text>
-              <Text style={styles.sectionDescription}>
-                <ReloadInstructions />
-              </Text>
-            </View>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>Debug</Text>
-              <Text style={styles.sectionDescription}>
-                <DebugInstructions />
-              </Text>
-            </View>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>Learn More</Text>
-              <Text style={styles.sectionDescription}>
-                Read the docs to discover what to do next:
-              </Text>
-            </View>
-            <LearnMoreLinks />
-          </View>
-        </ScrollView>
-      </SafeAreaView>
-    </Fragment>
-  )
+          </ScrollView>
+        </SafeAreaView>
+      </Fragment>
+    )
+  }
 }
 
 export default App
