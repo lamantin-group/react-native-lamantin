@@ -54,9 +54,12 @@ export class Column extends PureComponent<ColumnProps> {
     const { style, space, children, separator, mode, top, bottom } = this.props
     const isFlex = this.props.mode === 'flex'
     let childrenCount = 0
-    React.Children.forEach(child => {
-      if (child) childrenCount++
-    })
+    React.Children.forEach(
+      (child: any) => {
+        if (child) childrenCount++
+      },
+      () => {}
+    )
     const solverSeparator = SOLVER_SEPARATOR[mode]
     if (top !== null) {
       style.paddingTop = top
