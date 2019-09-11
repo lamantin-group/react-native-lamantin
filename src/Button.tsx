@@ -51,9 +51,17 @@ export class Button extends PureComponent<ButtonProps> {
   render() {
     const { style, onPress, enabled, isLoading } = this.props
     return (
-      <ClickableView disabled={!enabled} onPress={isLoading ? undefined : onPress} style={style}>
-        <StateView enabled={enabled}>{this.renderContent()}</StateView>
-      </ClickableView>
+      <StateView enabled={enabled} style={style}>
+        <ClickableView
+          disabled={!enabled}
+          onPress={isLoading ? undefined : onPress}
+          style={{
+            alignItems: 'center',
+            paddingVertical: 12,
+          }}>
+          {this.renderContent()}
+        </ClickableView>
+      </StateView>
     )
   }
 }

@@ -9,7 +9,15 @@
  */
 
 import React, { Fragment, Component } from 'react'
-import { SafeAreaView, StyleSheet, ScrollView, View, Text, StatusBar } from 'react-native'
+import {
+  SafeAreaView,
+  StyleSheet,
+  ScrollView,
+  View,
+  Text,
+  StatusBar,
+  ButtonProps,
+} from 'react-native'
 
 import {
   Header,
@@ -28,6 +36,7 @@ const styles = StyleSheet.create({
     right: 0,
   },
   body: {
+    flex: 1,
     backgroundColor: Colors.white,
     paddingHorizontal: 16,
     paddingTop: 16,
@@ -69,10 +78,25 @@ class App extends Component {
   state = {
     isLoading: false,
     enabled: true,
+    uppercase: true,
+  }
+
+  button(props: any = {}) {
+    const { isLoading, enabled, uppercase } = this.state
+
+    return (
+      <Button
+        {...props}
+        text="Button"
+        isLoading={isLoading}
+        enabled={enabled}
+        uppercase={uppercase}
+      />
+    )
   }
 
   render() {
-    const { isLoading, enabled } = this.state
+    const { isLoading, enabled, uppercase } = this.state
 
     return (
       <Fragment>
@@ -97,10 +121,23 @@ class App extends Component {
                 onChanges={enabled => this.setState({ enabled })}
               />
 
+              <SwitchView
+                style={{ marginTop: 12 }}
+                title="uppercase"
+                description="description uppercase"
+                checked={uppercase}
+                onChanges={uppercase => this.setState({ uppercase })}
+              />
+
               <DividerLine style={{ marginVertical: 12 }} color="transparent" />
               <Text style={styles.h1}>Button</Text>
               <View style={{ marginTop: 12 }} />
-              <Button text="Button" isLoading={isLoading} enabled={enabled} />
+              {this.button()}
+              {this.button({
+                style: {
+                  backgroundColor: '#ffcc00',
+                },
+              })}
             </View>
           </ScrollView>
         </SafeAreaView>
