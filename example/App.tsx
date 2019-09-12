@@ -82,7 +82,7 @@ class App extends Component {
     isLoading: false,
     enabled: true,
     uppercase: true,
-    space: 0,
+    space: 24,
   }
 
   button(props: any = {}) {
@@ -159,6 +159,11 @@ class App extends Component {
                 {this.button({
                   style: {
                     backgroundColor: '#ffcc00',
+                  },
+                })}
+                {this.button({
+                  style: {
+                    backgroundColor: 'cyan',
                   },
                 })}
               </Column>
