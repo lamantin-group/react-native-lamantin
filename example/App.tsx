@@ -90,11 +90,11 @@ class App extends Component {
 
     return (
       <Button
-        {...props}
         text="Button"
         isLoading={isLoading}
         enabled={enabled}
         uppercase={uppercase}
+        {...props}
       />
     )
   }
@@ -152,9 +152,11 @@ class App extends Component {
                 mode={'between'}
                 style={{ borderColor: 'blue', borderWidth: 1 }}>
                 {this.button({
+                  text: 'Separator: ',
                   style: {
                     backgroundColor: '#f4f4f4',
                   },
+                  onPress: () => {},
                 })}
                 {this.button({
                   style: {
