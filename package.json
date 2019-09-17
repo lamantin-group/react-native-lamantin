@@ -6,7 +6,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/lamantingroup/react-native-lamantin.git"
+    "url": "git+https://github.com/lamantin-group/react-native-lamantin.git"
   },
   "keywords": [
     "react-native",
