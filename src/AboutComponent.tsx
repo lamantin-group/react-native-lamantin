@@ -24,7 +24,7 @@ export interface AboutComponentProps {
   actions: ActionItem[]
   company?: ActionItem & { includeYear: boolean; includeCopyright: boolean }
   style?: ViewStyle
-  headerStyle?: ViewStyle
+  headerStyle?: ViewStyle & { theme?: Theme }
   actionStyle?: ViewStyle
   theme?: Theme
 }
@@ -37,6 +37,29 @@ export class AboutComponent extends PureComponent<AboutComponentProps> {
       description: `© 2018-${new Date().getFullYear()} LTD "Lamantin Group"`,
     },
     theme: defaultTheme,
+  }
+
+  renderHeader() {
+    const { app, headerStyle } = this.props
+    let theme = headerStyle && headerStyle.theme
+    if (!theme) {
+      theme = this.props.theme
+    }
+    return (
+      <ClickableView
+        onPress={app.onPress}
+        style={[{ paddingVertical: 64, alignItems: 'center' }, headerStyle]}>
+        {app.logo && (
+          <Image
+            style={{ height: 86, width: 86, resizeMode: 'contain' }}
+            {...app.logoProps}
+            source={app.logo}
+          />
+        )}
+        <Text style={{ fontSize: 24, ...theme!.textPrimary }}>{app.title}</Text>
+        {app.description && <Text style={theme!.textSecondary}>{app.description}</Text>}
+      </ClickableView>
+    )
   }
 
   renderFooter() {
@@ -62,19 +85,7 @@ export class AboutComponent extends PureComponent<AboutComponentProps> {
 
     return (
       <View style={[{ justifyContent: 'space-between', height: '100%' }, style]}>
-        <ClickableView
-          onPress={app.onPress}
-          style={[{ paddingVertical: 64, alignItems: 'center' }, headerStyle]}>
-          {app.logo && (
-            <Image
-              style={{ height: 86, width: 86, resizeMode: 'contain' }}
-              {...app.logoProps}
-              source={app.logo}
-            />
-          )}
-          <Text style={{ fontSize: 24, ...theme!.textPrimary }}>{app.title}</Text>
-          {app.description && <Text style={theme!.textSecondary}>{app.description}</Text>}
-        </ClickableView>
+        {this.renderHeader()}
         <FlatList
           data={actions}
           keyExtractor={item => item.title}
