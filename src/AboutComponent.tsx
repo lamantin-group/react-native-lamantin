@@ -52,7 +52,7 @@ export default class AboutComponent extends PureComponent<AboutComponentProps> {
     return (
       <View style={{ justifyContent: 'space-between', height: '100%' }}>
         <View style={{ paddingVertical: 64, alignItems: 'center' }}>
-          {app.logo && <Image style={{ height: 64, width: 64 }} source={app.logo} />}
+          {app.logo && <Image style={{ height: 86, width: 86 }} source={app.logo} />}
           <Text style={{ fontSize: 24 }}>{app.name}</Text>
           {app.version && <Text>{app.version}</Text>}
         </View>

@@ -203,7 +203,7 @@ class App extends Component {
         app={{
           name: 'Example',
           logo: require('./assets/ic_logo.png'),
-          version: '1.0.1',
+          // version: 'Version: 1.0.1',
         }}
         actions={[
           {
@@ -212,6 +212,12 @@ class App extends Component {
             onPress: () => this.setState({ renderable: { render: this.renderMain } }),
           },
           { title: 'Title without description' },
+          { title: 'Long title where you can see that it is redirected to another line' },
+          {
+            title: 'Short title',
+            description:
+              'So long description, where you can write some additional information about this action item',
+          },
         ]}
       />
     )
