@@ -56,7 +56,7 @@ export class AboutComponent extends PureComponent<AboutComponentProps> {
             source={app.logo}
           />
         )}
-        <Text style={{ fontSize: 24, ...theme!.textPrimary }}>{app.title}</Text>
+        <Text style={{ fontSize: 24, marginTop: 8, ...theme!.textPrimary }}>{app.title}</Text>
         {app.description && <Text style={theme!.textSecondary}>{app.description}</Text>}
       </ClickableView>
     )
