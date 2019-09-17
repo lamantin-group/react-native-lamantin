@@ -1,7 +1,16 @@
 import React, { PureComponent } from 'react'
-import { FlatList, Image, ImageSourcePropType, Text, View, ViewStyle } from 'react-native'
+import {
+  FlatList,
+  Image,
+  ImageSourcePropType,
+  Text,
+  View,
+  ViewStyle,
+  ImageProps,
+} from 'react-native'
 import { ClickableView } from './ClickableView'
 import { DividerLine } from './DividerLine'
+import { Theme, defaultTheme } from './Theme'
 
 export type ActionItem = {
   title: string
@@ -11,12 +20,13 @@ export type ActionItem = {
 }
 
 export interface AboutComponentProps {
-  app: ActionItem
+  app: ActionItem & { logoProps: ImageProps }
   actions: ActionItem[]
-  company?: ActionItem
+  company?: ActionItem & { includeYear: boolean; includeCopyright: boolean }
   style?: ViewStyle
   headerStyle?: ViewStyle
   actionStyle?: ViewStyle
+  theme?: Theme
 }
 
 export class AboutComponent extends PureComponent<AboutComponentProps> {
@@ -26,10 +36,11 @@ export class AboutComponent extends PureComponent<AboutComponentProps> {
       title: '',
       description: `© 2018-${new Date().getFullYear()} LTD "Lamantin Group"`,
     },
+    theme: defaultTheme,
   }
 
   renderFooter() {
-    const { company } = this.props
+    const { company, theme } = this.props
     if (!company) return null
 
     return (
@@ -40,23 +51,29 @@ export class AboutComponent extends PureComponent<AboutComponentProps> {
           alignContent: 'center',
           alignItems: 'center',
         }}>
-        <Text style={{ fontSize: 16 }}>{company.title}</Text>
-        {company.description && <Text style={{ color: '#666666' }}>{company.description}</Text>}
+        <Text style={[{ fontSize: 16 }, theme!.textPrimary]}>{company.title}</Text>
+        {company.description && <Text style={theme!.textSecondary}>{company.description}</Text>}
       </ClickableView>
     )
   }
 
   render() {
-    const { actions, app, style, headerStyle } = this.props
+    const { actions, app, style, headerStyle, theme } = this.props
 
     return (
       <View style={[{ justifyContent: 'space-between', height: '100%' }, style]}>
         <ClickableView
           onPress={app.onPress}
           style={[{ paddingVertical: 64, alignItems: 'center' }, headerStyle]}>
-          {app.logo && <Image style={{ height: 86, width: 86 }} source={app.logo} />}
-          <Text style={{ fontSize: 24 }}>{app.title}</Text>
-          {app.description && <Text>{app.description}</Text>}
+          {app.logo && (
+            <Image
+              style={{ height: 86, width: 86, resizeMode: 'contain' }}
+              {...app.logoProps}
+              source={app.logo}
+            />
+          )}
+          <Text style={{ fontSize: 24, ...theme!.textPrimary }}>{app.title}</Text>
+          {app.description && <Text style={theme!.textSecondary}>{app.description}</Text>}
         </ClickableView>
         <FlatList
           data={actions}
@@ -76,8 +93,8 @@ export class AboutComponent extends PureComponent<AboutComponentProps> {
                   <Image source={item.logo} style={{ height: 24, width: 24, marginEnd: 8 }} />
                 )}
                 <View>
-                  <Text style={{ fontSize: 16 }}>{item.title}</Text>
-                  {item.description && <Text style={{ color: '#666666' }}>{item.description}</Text>}
+                  <Text style={{ fontSize: 16, ...theme!.textPrimary }}>{item.title}</Text>
+                  {item.description && <Text style={theme!.textSecondary}>{item.description}</Text>}
                 </View>
               </ClickableView>
             )
