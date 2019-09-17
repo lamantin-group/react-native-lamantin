@@ -1,9 +1,9 @@
 import React, { PureComponent } from 'react'
-import { TouchableOpacity, ViewStyle } from 'react-native'
+import { TouchableOpacity, ViewStyle, StyleProp } from 'react-native'
 
 interface ClickableViewProps {
   onPress: () => void
-  style?: ViewStyle
+  style?: StyleProp<ViewStyle>
 
   /**
    * Use for change opacity for pressed button;
@@ -20,7 +20,6 @@ interface ClickableViewProps {
 export class ClickableView extends PureComponent<ClickableViewProps> {
   static defaultProps = {
     onPress: () => {},
-    style: null,
     opacity: 0.3,
     disabled: false,
   }

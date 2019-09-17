@@ -3,22 +3,20 @@ import { FlatList, Image, ImageSourcePropType, Text, View, ViewStyle } from 'rea
 import { ClickableView } from './ClickableView'
 import { DividerLine } from './DividerLine'
 
-type ActionItem = {
+export type ActionItem = {
   title: string
   description?: string
   onPress?: () => void
   logo?: ImageSourcePropType
 }
 
-interface AboutComponentProps {
-  app: {
-    name: string
-    version?: string
-    logo?: ImageSourcePropType
-  }
+export interface AboutComponentProps {
+  app: ActionItem
   actions: ActionItem[]
   company?: ActionItem
   style?: ViewStyle
+  headerStyle?: ViewStyle
+  actionStyle?: ViewStyle
 }
 
 export default class AboutComponent extends PureComponent<AboutComponentProps> {
@@ -47,16 +45,19 @@ export default class AboutComponent extends PureComponent<AboutComponentProps> {
       </ClickableView>
     )
   }
+
   render() {
-    const { actions, app } = this.props
+    const { actions, app, style, headerStyle } = this.props
 
     return (
-      <View style={{ justifyContent: 'space-between', height: '100%' }}>
-        <View style={{ paddingVertical: 64, alignItems: 'center' }}>
+      <View style={[{ justifyContent: 'space-between', height: '100%' }, style]}>
+        <ClickableView
+          onPress={app.onPress}
+          style={[{ paddingVertical: 64, alignItems: 'center' }, headerStyle]}>
           {app.logo && <Image style={{ height: 86, width: 86 }} source={app.logo} />}
-          <Text style={{ fontSize: 24 }}>{app.name}</Text>
-          {app.version && <Text>{app.version}</Text>}
-        </View>
+          <Text style={{ fontSize: 24 }}>{app.title}</Text>
+          {app.description && <Text>{app.description}</Text>}
+        </ClickableView>
         <FlatList
           data={actions}
           ItemSeparatorComponent={() => <DividerLine />}
