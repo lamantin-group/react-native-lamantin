@@ -46,7 +46,7 @@ export class Column extends PureComponent<ColumnProps> {
 
   render() {
     const { style, space, children, separator } = this.props
-    const childrenCount = children ? children.length : 0
+    const childrenCount = React.Children.count(children)
 
     return (
       <View style={{ ...style, flexDirection: 'column' }}>
