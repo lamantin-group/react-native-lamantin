@@ -1,5 +1,7 @@
-What is it
+react-native-lamantin
 ----------
+![appcenter](https://build.appcenter.ms/v0.1/apps/329901ce-fd46-48b1-af74-2f6debede91a/branches/master/badge)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/298134e2eaa345b1a50f5914bbd0f8df)](https://www.codacy.com/manual/whalemare/react-native-lamantin?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=lamantin-group/react-native-lamantin&amp;utm_campaign=Badge_Grade)
 
 Set of components for https://lamantin.group development
 
