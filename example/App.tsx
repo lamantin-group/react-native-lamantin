@@ -76,6 +76,7 @@ import { SwitchView } from '../src/SwitchView'
 import { DividerLine } from '../src/DividerLine'
 import { Column } from '../src/Column'
 import { Circle } from '../src/Circle'
+import AboutComponent from '../src/AboutComponent'
 
 class App extends Component {
   state = {
@@ -83,6 +84,9 @@ class App extends Component {
     enabled: true,
     uppercase: true,
     space: 24,
+    renderable: {
+      type: 'about',
+    },
   }
 
   button(props: any = {}) {
@@ -99,7 +103,7 @@ class App extends Component {
     )
   }
 
-  render() {
+  renderMain = () => {
     const { isLoading, enabled, uppercase, space } = this.state
 
     return (
@@ -164,8 +168,16 @@ class App extends Component {
                   },
                 })}
                 {this.button({
+                  text: 'Go to about screen: ',
                   style: {
                     backgroundColor: 'cyan',
+                  },
+                  onPress: () => {
+                    this.setState({
+                      renderable: {
+                        type: 'about',
+                      },
+                    })
                   },
                 })}
               </Column>
@@ -183,6 +195,31 @@ class App extends Component {
         </SafeAreaView>
       </Fragment>
     )
+  }
+
+  renderAboutPage = () => {
+    return (
+      <AboutComponent
+        appName={'Example'}
+        actions={[
+          {
+            title: 'Title',
+            description: 'Description',
+            onPress: () => this.setState({ renderable: { render: this.renderMain } }),
+          },
+          { title: 'Title without description' },
+        ]}
+      />
+    )
+  }
+
+  render() {
+    const { renderable } = this.state
+    if (renderable.type === 'about') {
+      return <SafeAreaView>{this.renderAboutPage()}</SafeAreaView>
+    } else {
+      return this.renderMain()
+    }
   }
 }
 
