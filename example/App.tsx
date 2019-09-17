@@ -211,7 +211,7 @@ class App extends Component {
             description: 'Description',
             onPress: () => this.setState({ renderable: { render: this.renderMain } }),
           },
-          { title: 'Title without description' },
+          { title: 'Developed by lamantin.group', logo: require('./assets/ic_logo.png') },
           { title: 'Long title where you can see that it is redirected to another line' },
           {
             title: 'Short title',

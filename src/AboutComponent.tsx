@@ -7,6 +7,7 @@ type ActionItem = {
   title: string
   description?: string
   onPress?: () => void
+  logo?: ImageSourcePropType
 }
 
 interface AboutComponentProps {
@@ -67,9 +68,15 @@ export default class AboutComponent extends PureComponent<AboutComponentProps> {
                   paddingVertical: 8,
                   paddingHorizontal: 16,
                   alignContent: 'center',
+                  flexDirection: 'row',
                 }}>
-                <Text style={{ fontSize: 16 }}>{item.title}</Text>
-                {item.description && <Text style={{ color: '#666666' }}>{item.description}</Text>}
+                {item.logo && (
+                  <Image source={item.logo} style={{ height: 24, width: 24, marginEnd: 8 }} />
+                )}
+                <View>
+                  <Text style={{ fontSize: 16 }}>{item.title}</Text>
+                  {item.description && <Text style={{ color: '#666666' }}>{item.description}</Text>}
+                </View>
               </ClickableView>
             )
           }}
