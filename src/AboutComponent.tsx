@@ -60,6 +60,7 @@ export default class AboutComponent extends PureComponent<AboutComponentProps> {
         </ClickableView>
         <FlatList
           data={actions}
+          keyExtractor={item => item.title}
           ItemSeparatorComponent={() => <DividerLine />}
           renderItem={({ item }) => {
             return (
