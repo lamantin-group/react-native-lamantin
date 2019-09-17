@@ -19,7 +19,7 @@ export interface AboutComponentProps {
   actionStyle?: ViewStyle
 }
 
-export default class AboutComponent extends PureComponent<AboutComponentProps> {
+export class AboutComponent extends PureComponent<AboutComponentProps> {
   static defaultProps = {
     style: {},
     company: {
