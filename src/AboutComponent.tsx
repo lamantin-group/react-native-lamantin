@@ -1,13 +1,5 @@
 import React, { PureComponent } from 'react'
-import {
-  View,
-  ViewStyle,
-  ScrollView,
-  FlatList,
-  Image,
-  ImageSourcePropType,
-  Text,
-} from 'react-native'
+import { FlatList, Image, ImageSourcePropType, Text, View, ViewStyle } from 'react-native'
 import { ClickableView } from './ClickableView'
 import { DividerLine } from './DividerLine'
 
@@ -18,41 +10,74 @@ type ActionItem = {
 }
 
 interface AboutComponentProps {
-  appName: string
+  app: {
+    name: string
+    version?: string
+    logo?: ImageSourcePropType
+  }
   actions: ActionItem[]
+  company?: ActionItem
   style?: ViewStyle
-  appLogo?: ImageSourcePropType
 }
 
 export default class AboutComponent extends PureComponent<AboutComponentProps> {
   static defaultProps = {
     style: {},
+    company: {
+      title: '',
+      description: `© 2018-${new Date().getFullYear()} LTD "Lamantin Group"`,
+    },
   }
 
-  render() {
-    const { style, actions, appLogo, appName } = this.props
-    // textStyles
+  renderFooter() {
+    const { company } = this.props
+    if (!company) return null
+
     return (
-      <FlatList
-        data={actions}
-        ListHeaderComponent={() => {
-          return (
-            <View style={{ paddingVertical: 64, alignItems: 'center' }}>
-              {appLogo && <Image style={{ height: 64, width: 64 }} source={appLogo} />}
-              <Text style={{ fontSize: 24 }}>{appName}</Text>
-            </View>
-          )
-        }}
-        ItemSeparatorComponent={() => <DividerLine />}
-        renderItem={({ item }) => {
-          return (
-            <ClickableView onPress={item.onPress}>
-              <Text>{item.title}</Text>
-              {item.description && <Text></Text>}
-            </ClickableView>
-          )
-        }}
-      />
+      <ClickableView
+        style={{
+          paddingVertical: 8,
+          paddingHorizontal: 16,
+          alignContent: 'center',
+          alignItems: 'center',
+        }}>
+        <Text style={{ fontSize: 16 }}>{company.title}</Text>
+        {company.description && <Text style={{ color: '#666666' }}>{company.description}</Text>}
+      </ClickableView>
+    )
+  }
+  render() {
+    const { actions, app } = this.props
+
+    return (
+      <View style={{ justifyContent: 'space-between', height: '100%' }}>
+        <View style={{ paddingVertical: 64, alignItems: 'center' }}>
+          {app.logo && <Image style={{ height: 64, width: 64 }} source={app.logo} />}
+          <Text style={{ fontSize: 24 }}>{app.name}</Text>
+          {app.version && <Text>{app.version}</Text>}
+        </View>
+        <FlatList
+          data={actions}
+          ItemSeparatorComponent={() => <DividerLine />}
+          renderItem={({ item }) => {
+            return (
+              <ClickableView
+                onPress={item.onPress}
+                style={{
+                  paddingVertical: 8,
+                  paddingHorizontal: 16,
+                  alignContent: 'center',
+                }}>
+                <Text style={{ fontSize: 16 }}>{item.title}</Text>
+                {item.description && <Text style={{ color: '#666666' }}>{item.description}</Text>}
+              </ClickableView>
+            )
+          }}
+        />
+        <View style={{ position: 'absolute', bottom: 0, left: 0, right: 0 }}>
+          {this.renderFooter()}
+        </View>
+      </View>
     )
   }
 }

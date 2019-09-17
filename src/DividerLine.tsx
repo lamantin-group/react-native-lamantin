@@ -14,7 +14,7 @@ export class DividerLine extends PureComponent<Props> {
     style: {},
     vertical: false,
     width: 1,
-    color: '#4f4f4f',
+    color: '#E0E0E0',
   }
 
   render() {

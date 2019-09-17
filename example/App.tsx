@@ -200,7 +200,11 @@ class App extends Component {
   renderAboutPage = () => {
     return (
       <AboutComponent
-        appName={'Example'}
+        app={{
+          name: 'Example',
+          logo: require('./assets/ic_logo.png'),
+          version: '1.0.1',
+        }}
         actions={[
           {
             title: 'Title',
@@ -216,7 +220,7 @@ class App extends Component {
   render() {
     const { renderable } = this.state
     if (renderable.type === 'about') {
-      return <SafeAreaView>{this.renderAboutPage()}</SafeAreaView>
+      return <SafeAreaView style={{ flex: 1 }}>{this.renderAboutPage()}</SafeAreaView>
     } else {
       return this.renderMain()
     }
