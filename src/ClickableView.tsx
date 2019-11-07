@@ -19,7 +19,7 @@ interface ClickableViewProps {
 
 export class ClickableView extends PureComponent<ClickableViewProps> {
   static defaultProps = {
-    onPress: () => {},
+    onPress: null,
     opacity: 0.3,
     disabled: false,
   }
@@ -29,10 +29,10 @@ export class ClickableView extends PureComponent<ClickableViewProps> {
 
     return (
       <TouchableOpacity
-        disabled={disabled}
+        disabled={disabled || !onPress}
         activeOpacity={opacity}
         style={style}
-        onPress={() => onPress()}>
+        onPress={onPress}>
         {children}
       </TouchableOpacity>
     )
