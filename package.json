@@ -26,7 +26,7 @@
     "git:reset": "rm -rf .git && git init && git add -A && git commit -m 'Initial commit'",
     "android": "cd example && npm run android",
     "ios": "cd example && npm run ios",
-    "publish:up": "npm version patch && npm publish && git push"
+    "npm:publish": "npm version patch && npm publish && git push"
   },
   "peerDependencies": {
     "react": "^16.9.0",
