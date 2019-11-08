@@ -85,7 +85,7 @@ export class WizardComponent extends Component<WizardComponentProps, WizardCompo
         </ClickableView>
 
         <View>
-          {renderStep(steps[index], index)}
+          {renderStep!!(steps[index], index)}
 
           <View>{this.pagination}</View>
           <ClickableView
