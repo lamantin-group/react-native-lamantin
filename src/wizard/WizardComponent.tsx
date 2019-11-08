@@ -2,7 +2,7 @@
 
 import React, { Component } from 'react'
 import { Dimensions, LayoutAnimation, Text, View, ViewStyle } from 'react-native'
-import Carousel from 'react-native-snap-carousel'
+import Carousel, { CarouselStatic } from 'react-native-snap-carousel'
 import { ClickableView } from '../ClickableView'
 import CarouselPagination from './CarouselPagination'
 import { Step } from './Step'
@@ -36,6 +36,8 @@ export class WizardComponent extends Component<WizardComponentProps, WizardCompo
   static defaultProps = {
     renderStep: (step: Step) => <WizardStepComponent step={step} />,
   }
+
+  carouselRef?: CarouselStatic<any> = undefined
 
   state = {
     index: 0,
@@ -89,6 +91,7 @@ export class WizardComponent extends Component<WizardComponentProps, WizardCompo
 
           <Carousel
             data={steps}
+            ref={(ref: any) => (this.carouselRef = ref)}
             slideStyle={{ paddingHorizontal: 16 }}
             renderItem={({ item, index }) => renderStep && renderStep(item, index)}
             sliderWidth={width}
@@ -113,7 +116,9 @@ export class WizardComponent extends Component<WizardComponentProps, WizardCompo
               if (isLastStep) {
                 onFinish()
               } else {
-                this.setState({ index: index + 1 })
+                if (this.carouselRef) {
+                  this.carouselRef.snapToNext()
+                }
               }
             }}>
             <Text style={{ fontWeight: '500' }}>{isLastStep ? strings.finish : strings.next}</Text>
