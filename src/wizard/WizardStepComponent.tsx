@@ -1,6 +1,5 @@
 import React, { PureComponent } from 'react'
-import PropTypes from 'prop-types'
-import { View, StyleSheet, Text } from 'react-native'
+import { Text, View } from 'react-native'
 import { Step } from './Step'
 
 export interface WizardStepComponentProps {
@@ -9,11 +8,11 @@ export interface WizardStepComponentProps {
 
 export class WizardStepComponent extends PureComponent<WizardStepComponentProps> {
   render() {
-    const { title, description, customRender } = this.props.step
+    const { title, description, renderCustom } = this.props.step
 
     return (
       <View style={{ alignItems: 'center' }}>
-        {customRender && customRender()}
+        {renderCustom && renderCustom()}
         {!!title && (
           <Text style={{ textAlign: 'center', color: '#fff', fontSize: 24, marginTop: 47 }}>
             {title}

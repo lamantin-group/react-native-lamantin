@@ -1,14 +1,12 @@
 'use strict'
 
-import PropTypes from 'prop-types'
 import React, { Component } from 'react'
-import { Text, View, ViewStyle, LayoutAnimation, Dimensions } from 'react-native'
-import CarouselPagination from './CarouselPagination'
+import { Dimensions, LayoutAnimation, Text, View, ViewStyle } from 'react-native'
+import Carousel from 'react-native-snap-carousel'
 import { ClickableView } from '../ClickableView'
-import { on } from 'cluster'
+import CarouselPagination from './CarouselPagination'
 import { Step } from './Step'
 import { WizardStepComponent } from './WizardStepComponent'
-import Carousel from 'react-native-snap-carousel'
 
 const enStrings: WizardComponentStrings = {
   skip: 'Skip',
@@ -64,6 +62,7 @@ export class WizardComponent extends Component<WizardComponentProps, WizardCompo
     const { index } = this.state
     const isLastStep = index === steps.length - 1
     const isFirstStep = index === 0
+    const width = Dimensions.get('window').width
     return (
       <View
         style={[
@@ -90,9 +89,10 @@ export class WizardComponent extends Component<WizardComponentProps, WizardCompo
 
           <Carousel
             data={steps}
+            slideStyle={{ paddingHorizontal: 16 }}
             renderItem={({ item, index }) => renderStep && renderStep(item, index)}
-            sliderWidth={Dimensions.get('window').width}
-            itemWidth={Dimensions.get('window').width}
+            sliderWidth={width}
+            itemWidth={width}
             onSnapToItem={index => {
               LayoutAnimation.easeInEaseOut()
               this.setState({ index })
@@ -100,6 +100,7 @@ export class WizardComponent extends Component<WizardComponentProps, WizardCompo
           />
 
           <View>{this.pagination}</View>
+
           <ClickableView
             style={{
               backgroundColor: '#fff',
