@@ -2,12 +2,13 @@
 
 import PropTypes from 'prop-types'
 import React, { Component } from 'react'
-import { Text, View, ViewStyle } from 'react-native'
+import { Text, View, ViewStyle, LayoutAnimation, Dimensions } from 'react-native'
 import CarouselPagination from './CarouselPagination'
 import { ClickableView } from '../ClickableView'
 import { on } from 'cluster'
 import { Step } from './Step'
 import { WizardStepComponent } from './WizardStepComponent'
+import Carousel from 'react-native-snap-carousel'
 
 const enStrings: WizardComponentStrings = {
   skip: 'Skip',
@@ -85,7 +86,18 @@ export class WizardComponent extends Component<WizardComponentProps, WizardCompo
         </ClickableView>
 
         <View>
-          {renderStep && renderStep(steps[index], index)}
+          {/* {renderStep && renderStep(steps[index], index)} */}
+
+          <Carousel
+            data={steps}
+            renderItem={({ item, index }) => renderStep && renderStep(item, index)}
+            sliderWidth={Dimensions.get('window').width}
+            itemWidth={Dimensions.get('window').width}
+            onSnapToItem={index => {
+              LayoutAnimation.easeInEaseOut()
+              this.setState({ index })
+            }}
+          />
 
           <View>{this.pagination}</View>
           <ClickableView
